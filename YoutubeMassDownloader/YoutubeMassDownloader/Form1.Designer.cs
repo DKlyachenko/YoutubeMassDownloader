@@ -42,12 +42,15 @@
             this.lbPage = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.rQuality1 = new System.Windows.Forms.RadioButton();
+            this.rQuality3 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 110);
+            this.label2.Location = new System.Drawing.Point(23, 207);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 30;
@@ -65,7 +68,7 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(135, 164);
+            this.btnStop.Location = new System.Drawing.Point(135, 261);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(89, 23);
             this.btnStop.TabIndex = 28;
@@ -75,7 +78,7 @@
             // 
             // btnFolder
             // 
-            this.btnFolder.Location = new System.Drawing.Point(359, 125);
+            this.btnFolder.Location = new System.Drawing.Point(359, 222);
             this.btnFolder.Name = "btnFolder";
             this.btnFolder.Size = new System.Drawing.Size(89, 23);
             this.btnFolder.TabIndex = 27;
@@ -86,7 +89,7 @@
             // txtPath
             // 
             this.txtPath.Enabled = false;
-            this.txtPath.Location = new System.Drawing.Point(26, 125);
+            this.txtPath.Location = new System.Drawing.Point(26, 222);
             this.txtPath.Multiline = true;
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(327, 23);
@@ -95,21 +98,21 @@
             // lbFileName
             // 
             this.lbFileName.AutoSize = true;
-            this.lbFileName.Location = new System.Drawing.Point(23, 209);
+            this.lbFileName.Location = new System.Drawing.Point(23, 306);
             this.lbFileName.Name = "lbFileName";
             this.lbFileName.Size = new System.Drawing.Size(0, 13);
             this.lbFileName.TabIndex = 25;
             // 
             // pBar
             // 
-            this.pBar.Location = new System.Drawing.Point(26, 236);
+            this.pBar.Location = new System.Drawing.Point(26, 333);
             this.pBar.Name = "pBar";
             this.pBar.Size = new System.Drawing.Size(422, 23);
             this.pBar.TabIndex = 24;
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(26, 269);
+            this.txtInfo.Location = new System.Drawing.Point(26, 366);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -160,7 +163,7 @@
             // btnStart
             // 
             this.btnStart.Enabled = false;
-            this.btnStart.Location = new System.Drawing.Point(26, 164);
+            this.btnStart.Location = new System.Drawing.Point(26, 261);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(89, 23);
             this.btnStart.TabIndex = 17;
@@ -168,11 +171,45 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // rQuality1
+            // 
+            this.rQuality1.AutoSize = true;
+            this.rQuality1.Checked = true;
+            this.rQuality1.Location = new System.Drawing.Point(85, 116);
+            this.rQuality1.Name = "rQuality1";
+            this.rQuality1.Size = new System.Drawing.Size(47, 17);
+            this.rQuality1.TabIndex = 31;
+            this.rQuality1.TabStop = true;
+            this.rQuality1.Text = "High";
+            this.rQuality1.UseVisualStyleBackColor = true;
+            // 
+            // rQuality3
+            // 
+            this.rQuality3.AutoSize = true;
+            this.rQuality3.Location = new System.Drawing.Point(85, 139);
+            this.rQuality3.Name = "rQuality3";
+            this.rQuality3.Size = new System.Drawing.Size(45, 17);
+            this.rQuality3.TabIndex = 31;
+            this.rQuality3.Text = "Low";
+            this.rQuality3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Quality:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 425);
+            this.ClientSize = new System.Drawing.Size(483, 578);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.rQuality3);
+            this.Controls.Add(this.rQuality1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStop);
@@ -210,6 +247,9 @@
         private System.Windows.Forms.Label lbPage;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.RadioButton rQuality1;
+        private System.Windows.Forms.RadioButton rQuality3;
+        private System.Windows.Forms.Label label3;
     }
 }
 

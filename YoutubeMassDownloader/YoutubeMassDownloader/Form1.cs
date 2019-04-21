@@ -20,14 +20,17 @@ namespace YoutubeMassDownloader
             InitializeComponent();
         }
 
+        enum Quality {HIGH, LOW};
+
         string savePath = null;
         const int PAGE_SIZE = 20;
         const string BAD_SYMBOLS = "?/\\:*?'\"<>|";
         bool stop = false;
+        Quality videoQuality = Quality.HIGH;
 
         public void setProgress(object sender, ProgressEventArgs e)
         {
-            base.Invoke((Action)delegate { pBar.Value = (int)e.ProgressPercentage; });
+            base.Invoke((Action)delegate { pBar.Value = (int)e.ProgressPercentage>=0? (int)e.ProgressPercentage : 0; });
         }
 
         private async void btnStart_Click(object sender, EventArgs e)
@@ -44,24 +47,14 @@ namespace YoutubeMassDownloader
                 StreamWriter sw = new StreamWriter("log.txt", false, System.Text.Encoding.Default);
                 int i = 1;
                 VideoSearch items = new VideoSearch();
-                int startPage;
-                int pageCount;
-                if (txtPage.Text != "")
-                    startPage = int.Parse(txtPage.Text);
-                else
-                    startPage = 1;
-
-                if (txtPageCount.Text != "")
-                    pageCount = int.Parse(txtPageCount.Text);
-                else
-                    pageCount = 1;
+                int startPage = !string.IsNullOrEmpty(txtPage.Text) ? int.Parse(txtPage.Text) : 1;
+                int pageCount = !string.IsNullOrEmpty(txtPageCount.Text) ? int.Parse(txtPageCount.Text) : 1;
                 for (int j = (startPage - 1) * PAGE_SIZE; j < items.SearchQuery(txtSearch.Text, startPage + pageCount - 1).Count; j++)
                 {
                     if (stop)
                     {
                         sw.Close();
                         return;
-
                     }
                     var item = items.SearchQuery(txtSearch.Text, startPage + pageCount - 1)[j];
 
@@ -69,8 +62,22 @@ namespace YoutubeMassDownloader
                     try
                     {
                         IEnumerable<VideoInfo> videos = DownloadUrlResolver.GetDownloadUrls(item.Url);
-                        videos = DownloadUrlResolver.GetDownloadUrls(item.Url);
-                        VideoInfo video = videos.First();
+                        videos = DownloadUrlResolver.GetDownloadUrls(item.Url).Where(x => x.AudioBitrate>0 && x.Resolution>0 && x.VideoType==VideoType.Mp4);
+                        VideoInfo video;
+                        chooseQuality();
+                        switch (videoQuality)
+                        {
+                            case Quality.HIGH:
+                                video = videos.First(x => x.Resolution == videos.Max(r=>r.Resolution));
+                                break;
+                            case Quality.LOW:
+                                video = videos.First(x => x.Resolution == videos.Min(r => r.Resolution));
+                                break;
+                            default:
+                                video = videos.First(x => x.Resolution == videos.Max(r => r.Resolution));
+                                break;
+                        }
+                        videos.First();
                         string title = video.Title;
                         for (int k = 0; k < title.Length; k++)
                         {
@@ -140,5 +147,18 @@ namespace YoutubeMassDownloader
                 btnStart.Enabled = true;
             }
         }
+
+        private void chooseQuality()
+        {
+            if (rQuality1.Checked)
+            {
+                videoQuality = Quality.HIGH;
+            }
+            else
+            {
+                videoQuality = Quality.LOW;
+            }
+        }
+        
     }
 }
